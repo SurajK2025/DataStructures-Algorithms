@@ -3,8 +3,8 @@ package infixToPrefix;
 import java.util.Stack;
 
 public class InfixToPrefix {
-	private static boolean isOperator(char ch) {
-		return (!(ch >= 'a' && ch <= 'z') && !(ch >= '0' && ch <= '9') && !(ch >= 'A' && ch <= 'Z'));
+	private static boolean isOperand(char ch) {
+		return ((ch >= 'a' && ch <= 'z') && (ch >= '0' && ch <= '9') && (ch >= 'A' && ch <= 'Z'));
 	}
 
 	private static int getPriority(char ch) {
@@ -21,27 +21,27 @@ public class InfixToPrefix {
 			char ch = infix.charAt(i);
 			
 			if (ch == '(') operators.push(ch);
+			
+			else if (isOperand(ch)) operands.push(ch + "");
 
 			else if (ch == ')'){
 				while (!operators.empty() && operators.peek() != '(') {
-					String op1 = operands.pop();
-					String op2 = operands.pop();
+					String first = operands.pop();
+					String second = operands.pop();
 					char op = operators.pop();
-					String tmp = op + op2 + op1;
+					String tmp = op + second + first;
 					operands.push(tmp);
 				}
 				operators.pop();
 			}
-
-			else if (!isOperator(ch)) operands.push(ch + "");
 			
 			else
 			{
 				while (!operators.empty() && getPriority(ch)<=getPriority(operators.peek())) {	
-					String op1 = operands.pop();
-					String op2 = operands.pop();
+					String first = operands.pop();
+					String second = operands.pop();
 					char op = operators.pop();
-					String tmp = op + op2 + op1;
+					String tmp = op + second + first;
 					operands.push(tmp);
 				}
 				operators.push(ch);
@@ -49,10 +49,10 @@ public class InfixToPrefix {
 		}
 		
 		while (!operators.empty()){
-			String op1 = operands.pop();
-			String op2 = operands.pop();
+			String first = operands.pop();
+			String second = operands.pop();
 			char op = operators.pop();
-			String tmp = op + op2 + op1;
+			String tmp = op + second + first;
 			operands.push(tmp);
 		}
 		return operands.peek();
