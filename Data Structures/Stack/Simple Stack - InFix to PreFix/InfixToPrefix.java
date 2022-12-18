@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class InfixToPrefix {
 	private static boolean isOperand(char ch) {
-		return ((ch >= 'a' && ch <= 'z') && (ch >= '0' && ch <= '9') && (ch >= 'A' && ch <= 'Z'));
+		return ((ch >= 'a' && ch <= 'z') || (ch >= '0' && ch <= '9') || (ch >= 'A' && ch <= 'Z'));
 	}
 
 	private static int getPriority(char ch) {
