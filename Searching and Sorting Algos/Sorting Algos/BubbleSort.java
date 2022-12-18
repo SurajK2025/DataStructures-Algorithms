@@ -6,13 +6,13 @@ public class BubbleSort {
 
 	private static void bubbleSort(int[] intArray) {
 		
-		for(int i=0; i<intArray.length-1; i++) {
+		for(int i=0; i<intArray.length; i++) {
 			
-			for(int j=i+1; j<intArray.length; j++) {
+			for(int j=0; j<intArray.length-1; j++) {
 				
-				if(intArray[i]>intArray[j]) {
-					int temp = intArray[i];
-					intArray[i] = intArray[j];
+				if(intArray[j]>intArray[j+1]) {
+					int temp = intArray[j+1];
+					intArray[j+1] = intArray[j];
 					intArray[j] = temp;
 				}
 			}
